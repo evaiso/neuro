@@ -1,0 +1,37 @@
+import numpy as np
+
+class Neuro:
+    house = None
+    rock = None
+    attr = None
+
+    def __init__(self, house, rock, attr):
+        self.set_data(house, rock, attr)
+        self.go(house, rock, attr)
+        self.simp(house, rock, attr)
+
+    def set_data(self, house, rock, attr):
+        self.house = house
+        self.rock = rock
+        self.attr = attr
+
+    def act(self, x):
+        return 0 if x < 0.5 else 1
+
+    def go(self, house = None, rock = None, attr = None):
+        x = np.array([house, rock, attr])
+        w11 = [0.5, -0.5, 0.5]
+        summ = np.dot(x, w11)
+        print('Вывод суммы: ' + str(summ))
+        y = self.act(summ)
+        return y
+
+    def simp(self,house, rock, attr):
+        summ_end = self.go(house, rock, attr)
+        print(summ_end)
+        if summ_end == 1:
+            print('Y')
+        else:
+            print('N')
+
+girl = Neuro(1, 0, 0)
